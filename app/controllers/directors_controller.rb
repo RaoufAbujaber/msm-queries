@@ -9,4 +9,12 @@ class DirectorsController < ApplicationController
 
     render({ :template => "director_templates/details"})
   end
+  def young
+    @the_director = Director.order(:dob).last
+    render({ :template => "director_templates/youngest" })
+  end
+  def old
+    @the_director = Director.where.not(dob: nil).order(:dob).first
+    render({ :template => "director_templates/eldest" })
+  end
 end
